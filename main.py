@@ -54,7 +54,7 @@ def change_master_password():
 def modify_password(key):
     key = key.upper()
     while True:
-        response = input(f"Do you want a generated password for '{key}' (y/n or type q to return):").upper()
+        response = input(f"Do you want a generated password for '{key}' (y/N or type q to return):").upper()
         if response == 'Q':
             return
         if response == 'Y':
