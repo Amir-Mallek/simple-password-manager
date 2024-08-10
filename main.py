@@ -1,6 +1,7 @@
 from cryptomodule import *
 from filemodule import *
 import getpass
+import os
 
 
 def print_options(title, options):
@@ -114,7 +115,7 @@ def edit_password():
             print(f"No password exists for '{key}'")
 
 
-filePath = 'passwords.json'
+filePath = "C:\\Users\\amirm\\PycharmProjects\\password-manager\\passwords.json"
 # toDelete password=123
 testKey = 'TEST'
 expected = 'haha'
