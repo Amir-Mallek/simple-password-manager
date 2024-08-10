@@ -1,0 +1,26 @@
+[2024-08-10 15:37:03] [info]: Initializing Manager
+[2024-08-10 15:37:03] [info]: Reading encrypted data
+[2024-08-10 15:37:14] [info]: Authenticating
+[2024-08-10 15:37:14] [info]: Failed Authentication
+[2024-08-10 15:37:20] [info]: Authenticating
+[2024-08-10 15:37:20] [info]: Successfull Authentication
+[2024-08-10 15:37:20] [info]: Decrypting data
+[2024-08-10 15:37:30] [info]: Getting password for 'IPHONE'
+[2024-08-10 15:39:56] [info]: Initializing Manager
+[2024-08-10 15:39:56] [info]: Reading encrypted data
+[2024-08-10 15:40:23] [info]: Initializing Manager
+[2024-08-10 15:40:23] [info]: Reading encrypted data
+[2024-08-10 15:40:30] [info]: Authenticating
+[2024-08-10 15:40:30] [info]: Successfull Authentication
+[2024-08-10 15:40:30] [info]: Decrypting data
+[2024-08-10 15:40:43] [info]: Initializing Manager
+[2024-08-10 15:40:43] [info]: Reading encrypted data
+[2024-08-10 15:48:25] [info]: Initializing Manager
+[2024-08-10 15:48:25] [info]: Reading encrypted data
+[2024-08-10 15:48:28] [info]: Authenticating
+[2024-08-10 15:48:28] [info]: Successfull Authentication
+[2024-08-10 15:48:28] [info]: Decrypting data
+[2024-08-10 15:48:45] [info]: Adding password for 'KHODHRA'
+[2024-08-10 15:48:45] [info]: Making encryted backup in 'C:\Users\amirm\PycharmProjects\password-manager'
+[2024-08-10 15:48:45] [info]: Backup Directory backups created
+[2024-08-10 15:48:45] [info]: Writing new encryted data

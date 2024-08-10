@@ -1,4 +1,4 @@
-from datetime import datetime
+import datetime
 from logger import *
 import json
 import os
@@ -15,6 +15,10 @@ def write_data(file_path, data):
         json.dump(data, file, indent=2)
 
 
-def make_backup(data):
-    now = datetime.now().timestamp()
-    write_data(f"backup{str(now)}.json", data)
+def make_backup(data, directory='backups'):
+    if not os.path.exists(directory):
+        os.makedirs(directory)
+        log(f"Backup Directory {directory} created")
+
+    now = int(datetime.datetime.now().timestamp())
+    write_data(f"{directory}/backup{now}.json", data)

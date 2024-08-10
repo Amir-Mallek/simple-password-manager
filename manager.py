@@ -5,14 +5,15 @@ import os
 
 class Manager:
     filePath = "C:\\Users\\amirm\\PycharmProjects\\password-manager\\passwords.json"
-    # toDelete password=123
+    # toDelete password=haha
     testKey = 'TEST'
     expected = 'haha'
 
     def __init__(self):
+        log('----Initializing Manager----')
         log('Reading encrypted data')
         self.encryptedData = read_data(Manager.filePath)
-        self.decryptedData = None
+        self.decryptedData = {}
         self.isAuth = False
         self.masterPassword = None
 
@@ -25,6 +26,8 @@ class Manager:
                 log('Successfull Authentication')
                 self.isAuth = True
                 self.masterPassword = password
+                log('Decrypting data')
+                self.decryptedData = decrypt_data(self.masterPassword, self.encryptedData)
                 return True
             log('Failed Authentication')
         except Exception as e:
@@ -38,30 +41,49 @@ class Manager:
             return self.masterPassword == password
         return False
 
-    def set_decrypt_data(self):
-        if self.isAuth:
-            log('Decrypting data')
-            self.decryptedData = decrypt_data(self.masterPassword, self.encryptedData)
-
-    def get_decrypted_data(self):
-        if self.decryptedData is not None:
-            return self.decryptedData
-        self.set_decrypt_data()
-        return self.decryptedData
-
     def get_password(self, key):
         key = key.upper()
         log(f"Getting password for '{key}'")
-        if self.isAuth and self.get_decrypted_data().keys().__contains__(key):
-            return self.get_decrypted_data()[key]
+        if self.isAuth and self.decryptedData.keys().__contains__(key):
+            return self.decryptedData[key]
         return None
 
+    def modify_password(self, key, password):
+        log(f"Making encryted backup in '{os.getcwd()}'")
+        make_backup(self.encryptedData)
+        self.decryptedData[key] = password
+        self.encryptedData[key] = encrypt_string(self.masterPassword, password)
+        log('Writing new encryted data')
+        write_data(Manager.filePath, self.encryptedData)
+
     def add_password(self, key, password):
-        log(f"Adding password for '{key}'")
+        key = key.upper()
         if self.isAuth and not self.decryptedData.keys().__contains__(key):
-            log(f"Making encryted backup in '{os.getcwd()}'")
-            make_backup(self.encryptedData)
-            self.decryptedData[key] = password
-            self.encryptedData[key] = encrypt_string(self.masterPassword, password)
-            log('Writing new encryted data')
-            write_data(Manager.filePath, self.encryptedData)
+            log(f"Adding password for '{key}'")
+            self.modify_password(key, password)
+            return True
+        return False
+
+    def update_password(self, key, password):
+        key = key.upper()
+        if self.isAuth and self.decryptedData.keys().__contains__(key):
+            log(f"Updating password for '{key}'")
+            self.modify_password(key, password)
+            return True
+        return False
+
+    def change_master_password(self, new_password):
+        log('Changing Master Password')
+        log(f"Making encrypted backup in '{os.getcwd()}'")
+        make_backup(self.encryptedData)
+        log('Encrypting data with new password')
+        self.encryptedData = encrypt_data(new_password, self.decryptedData)
+        log('Writing new encrypted data')
+        write_data(Manager.filePath, self.encryptedData)
+        self.masterPassword = new_password
+        log('Master Password Updated')
+
+    @staticmethod
+    def generate_password():
+        log('Generating password')
+        return generate_strong_password()
