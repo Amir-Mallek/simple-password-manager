@@ -1,4 +1,3 @@
 *.json
-interface.py
 .idea
 __pycache__
